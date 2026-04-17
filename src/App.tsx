@@ -29,6 +29,8 @@ function App() {
           <button onClick={() => scrollTo("skills")}>Skills</button>
           <button onClick={() => scrollTo("experience")}>Experience</button>
           <button onClick={() => scrollTo("projects")}>Projects</button>
+          <button onClick={() => scrollTo("education")}>Education</button>
+          <button onClick={() => scrollTo("languages")}>Languages</button>
           <button onClick={() => scrollTo("contact")}>Contact</button>
 
           <a href="/resume.pdf" target="_blank" rel="noreferrer" className="underline">
@@ -62,10 +64,9 @@ function App() {
             target="_blank"
             rel="noreferrer"
             className={`mt-6 inline-block px-5 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-base transition duration-300 transform hover:scale-105
-              ${
-                dark
-                  ? "bg-white text-black hover:bg-gray-200"
-                  : "bg-black text-white hover:bg-gray-800"
+              ${dark
+                ? "bg-white text-black hover:bg-gray-200"
+                : "bg-black text-white hover:bg-gray-800"
               }`}
           >
             Download Resume
@@ -87,12 +88,12 @@ function App() {
         transition={{ duration: 0.6 }}
         className="py-12 md:py-16 text-center px-4"
       >
-        <p
+        <motion.p
           className={`max-w-xl md:max-w-2xl mx-auto text-base md:text-xl leading-relaxed
             ${dark ? "text-gray-200" : "text-gray-700"}`}
         >
           {data.bio}
-        </p>
+        </motion.p>
       </motion.section>
 
       {/* SKILLS */}
@@ -118,7 +119,7 @@ function App() {
         </div>
       </motion.section>
 
-      {/* EXPERIENCE (FIXED UI) */}
+      {/* EXPERIENCE */}
       <motion.section
         id="experience"
         initial={{ opacity: 0, y: 40 }}
@@ -176,45 +177,73 @@ function App() {
               className={`rounded-2xl overflow-hidden transition
                 ${dark ? "bg-gray-900" : "bg-white shadow-md hover:shadow-xl"}`}
             >
-              <img
-                src={p.image}
-                alt={p.title}
-                className="w-full h-40 md:h-48 object-cover"
-              />
+              <img src={p.image} alt={p.title} className="w-full h-40 md:h-48 object-cover" />
 
               <div className="p-4 md:p-6">
-                <h3 className="text-lg md:text-2xl font-semibold">
-                  {p.title}
-                </h3>
-                <p
-                  className={`${dark ? "text-gray-400" : "text-gray-600"} mt-2 text-sm md:text-base`}
-                >
+                <h3 className="text-lg md:text-2xl font-semibold">{p.title}</h3>
+                <p className={`${dark ? "text-gray-400" : "text-gray-600"} mt-2 text-sm md:text-base`}>
                   {p.description}
                 </p>
-
-                <div className="flex gap-3 md:gap-4 mt-4 md:mt-6 flex-wrap">
-                  <a
-                    href={p.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm
-                      ${dark ? "bg-white text-black" : "bg-black text-white"}`}
-                  >
-                    GitHub
-                  </a>
-
-                  {p.live && (
-                    <a
-                      href={p.live}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-3 py-1 md:px-4 md:py-2 border rounded-full text-xs md:text-sm"
-                    >
-                      Live
-                    </a>
-                  )}
-                </div>
               </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* ✅ EDUCATION (ADDED) */}
+      <motion.section
+        id="education"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="py-12 md:py-16 text-center px-4"
+      >
+        <h2 className="text-2xl md:text-4xl mb-6">Education</h2>
+
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          transition={{ type: "spring", stiffness: 200 }}
+          className={`max-w-xl mx-auto p-6 rounded-2xl transition
+      ${dark ? "bg-gray-900" : "bg-white shadow-md hover:shadow-xl"}`}
+        >
+          <h3 className="text-lg font-semibold">
+            {data.education.degree}
+          </h3>
+
+          <p className="text-gray-500">
+            {data.education.college}
+          </p>
+
+          <p className="text-sm mt-2">
+            {data.education.year}
+          </p>
+
+          <p className="text-sm">
+            CGPA: {data.education.cgpa}
+          </p>
+        </motion.div>
+      </motion.section>
+
+      {/* ✅ LANGUAGES (ADDED) */}
+      <motion.section
+        id="languages"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="py-12 md:py-16 text-center px-4"
+      >
+        <h2 className="text-2xl md:text-4xl mb-6">Languages</h2>
+
+        <div className="flex flex-wrap justify-center gap-4">
+          {data.languages.map((lang, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.08 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className={`px-4 py-2 rounded-full text-sm transition
+          ${dark ? "bg-gray-800 text-gray-200" : "bg-gray-200 text-gray-800"}`}
+            >
+              {lang}
             </motion.div>
           ))}
         </div>
@@ -226,10 +255,7 @@ function App() {
           Let’s work together.
         </h2>
 
-        <a
-          href={`mailto:${data.email}?subject=Hiring Inquiry`}
-          className="text-sm md:text-lg underline hover:opacity-70 transition"
-        >
+        <a href={`mailto:${data.email}`} className="underline text-lg">
           {data.email}
         </a>
       </section>
