@@ -255,8 +255,22 @@ function App() {
           Let’s work together.
         </h2>
 
-        <a href={`mailto:${data.email}`} className="underline text-lg">
+        {/* EMAIL */}
+        <p className="mb-2">Email:</p>
+        <a
+          href={`mailto:${data.email}`}
+          className="block text-sm md:text-lg underline hover:opacity-70 transition mb-4"
+        >
           {data.email}
+        </a>
+
+        {/* PHONE */}
+        <p className="mb-2">Phone:</p>
+        <a
+          href={`tel:${data.phone}`}
+          className="block text-sm md:text-lg underline hover:opacity-70 transition"
+        >
+          {data.phone}
         </a>
       </section>
 

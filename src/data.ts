@@ -78,6 +78,7 @@ const data = {
   languages: ["English (Professional)", "Hindi (Fluent)", "Gujarati (Native)"],
 
   email: "jaimin.solanki.dev@gmail.com",
+  phone:"+91 7990680914"
 };
 
 export default data;
