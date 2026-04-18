@@ -181,9 +181,40 @@ function App() {
 
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-2xl font-semibold">{p.title}</h3>
+
                 <p className={`${dark ? "text-gray-400" : "text-gray-600"} mt-2 text-sm md:text-base`}>
                   {p.description}
                 </p>
+
+                {/* 🔥 BUTTONS ADDED HERE */}
+                <div className="flex gap-3 md:gap-4 mt-4 md:mt-6 flex-wrap">
+
+                  {/* GITHUB */}
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm transition
+        ${dark
+                        ? "bg-white text-black hover:bg-gray-200"
+                        : "bg-black text-white hover:bg-gray-800"}`}
+                  >
+                    GitHub
+                  </a>
+
+                  {/* LIVE (optional) */}
+                  {p.live && (
+                    <a
+                      href={p.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-3 py-1 md:px-4 md:py-2 border rounded-full text-xs md:text-sm hover:bg-gray-200 transition"
+                    >
+                      Live
+                    </a>
+                  )}
+
+                </div>
               </div>
             </motion.div>
           ))}
@@ -251,27 +282,38 @@ function App() {
 
       {/* CONTACT */}
       <section id="contact" className="py-12 md:py-16 text-center px-4">
-        <h2 className="text-2xl md:text-5xl mb-6">
+        <h2 className="text-2xl md:text-5xl mb-10">
           Let’s work together.
         </h2>
 
-        {/* EMAIL */}
-        <p className="mb-2">Email:</p>
-        <a
-          href={`mailto:${data.email}`}
-          className="block text-sm md:text-lg underline hover:opacity-70 transition mb-4"
-        >
-          {data.email}
-        </a>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8">
 
-        {/* PHONE */}
-        <p className="mb-2">Phone:</p>
-        <a
-          href={`tel:${data.phone}`}
-          className="block text-sm md:text-lg underline hover:opacity-70 transition"
-        >
-          {data.phone}
-        </a>
+          {/* EMAIL */}
+          <div className="text-center">
+            <p className="text-sm mb-2 text-gray-500">Email</p>
+            <a
+              href={`mailto:${data.email}`}
+              className="text-base md:text-lg underline hover:opacity-70 transition"
+            >
+              {data.email}
+            </a>
+          </div>
+
+          {/* DIVIDER (ONLY DESKTOP) */}
+          <div className="hidden md:block w-px h-10 bg-gray-400"></div>
+
+          {/* PHONE */}
+          <div className="text-center">
+            <p className="text-sm mb-2 text-gray-500">Phone</p>
+            <a
+              href={`tel:${data.phone}`}
+              className="text-base md:text-lg underline hover:opacity-70 transition"
+            >
+              {data.phone}
+            </a>
+          </div>
+
+        </div>
       </section>
 
     </div>
